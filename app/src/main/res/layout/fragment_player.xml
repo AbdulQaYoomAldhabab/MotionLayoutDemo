@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#00FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/motion_scene"
+    tools:context=".PlayerFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/expandedView"
+        android:layout_height="match_parent"
+        android:layout_width ="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <ImageView
+            android:layout_height="match_parent"
+            android:layout_width ="match_parent"
+            android:src="@drawable/ic_launcher_foreground"
+            android:background="#6A1B9A"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/collapseView"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:orientation="horizontal"
+        android:background="@color/colorAccent" />
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/collapseView"
+        android:layout_height="71dp"
+        android:layout_width ="match_parent"
+        android:background="@color/colorAccent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <ImageView
+            android:id="@+id/play"
+            android:layout_height="match_parent"
+            android:layout_width ="71dp"
+            android:padding="10dp"
+            android:src="@android:drawable/ic_media_play"
+            android:background="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width ="match_parent"
+            android:text="Celena Gomes"
+            android:gravity="center_vertical"
+            android:textColor="#FFF"
+            android:textSize="25dp"
+            android:layout_marginEnd="71dp"
+            android:layout_marginStart="71dp"
+            android:background="@color/colorAccent"
+            android:src="@android:drawable/ic_menu_report_image"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintEnd_toStartOf="@+id/play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_height="match_parent"
+            android:layout_width ="71dp"
+            android:src="@android:drawable/ic_menu_report_image"
+            android:background="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
