@@ -3,12 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionLayout"
     android:background="#00FFFFFF"
+    android:layout_gravity="bottom"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="71dp"
     app:layoutDescription="@xml/motion_scene"
     tools:context=".PlayerFragment">
 
+<!--    app:layoutDescription="@xml/motion_scene"-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/expandedView"
@@ -17,12 +20,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#00FFFFFF"
         >
         <ImageView
             android:layout_height="match_parent"
             android:layout_width ="match_parent"
             android:src="@drawable/ic_launcher_foreground"
             android:background="#6A1B9A"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -31,7 +39,10 @@
         android:layout_width="match_parent"
         android:layout_height="71dp"
         android:orientation="horizontal"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorAccent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
     <!--<androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/collapseView"
         android:layout_height="71dp"

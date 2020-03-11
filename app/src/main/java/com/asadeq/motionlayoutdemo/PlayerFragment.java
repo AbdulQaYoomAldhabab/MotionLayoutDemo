@@ -1,72 +1,217 @@
 package com.asadeq.motionlayoutdemo;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 
-public class PlayerFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class PlayerFragment extends DialogFragment implements OnSwipeGesture.OnSwipeGestureListener /*FragmentActivity*/ {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     public PlayerFragment() {
         // Required empty public constructor
     }
 
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.fragment_player);
+//
+//    }
+    MotionLayout motionLayout;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        //setStyle(STYLE_NO_FRAME, android.R.style.Theme_Holo_Light);
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Translucent_NoTitleBar);
     }
+
+//    @Override
+//    public Dialog onCreateDialog(final Bundle savedInstanceState) {
+//
+//        // the content
+//        final ConstraintLayout root = new ConstraintLayout(getActivity());
+//        root.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//
+//
+//        // creating the fullscreen dialog
+//        final Dialog dialog = new Dialog(getActivity());
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(root);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        dialog.setOwnerActivity(getActivity());
+//        dialog.setCancelable(false);
+//        return dialog;
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_player, container, false);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+
+        final RecyclerView collapseView = view.findViewById(R.id.collapseView);
+        motionLayout = view.findViewById(R.id.motionLayout);
+        motionLayout.loadLayoutDescription(R.xml.motion_scene);
+        motionLayout.callOnClick();
+
+        motionLayout.setTransitionListener(new MotionLayout.TransitionListener() {
+            @Override
+            public void onTransitionStarted(MotionLayout motionLayout, int i, int i1) {
+                //Toast.makeText(getContext(), "onTransitionStarted", Toast.LENGTH_SHORT).show();
+
+            }
+            @Override
+            public void onTransitionChange(MotionLayout motionLayout, int i, int i1, float v) {
+                //Toast.makeText(getContext(), "onTransitionChange", Toast.LENGTH_SHORT).show();
+
+            }
+            @Override
+            public void onTransitionCompleted(MotionLayout motionLayout, int i) {
+                if (motionLayout.getCurrentState() == motionLayout.getEndState()){
+                    Toast.makeText(getContext(), "Motion End State", Toast.LENGTH_SHORT).show();
+                } else if (motionLayout.getCurrentState() == motionLayout.getStartState()){
+                    Toast.makeText(getContext(), "Motion Start State", Toast.LENGTH_SHORT).show();
+
+                    FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(collapseView.
+                            getMeasuredWidth(), collapseView.getMeasuredHeight(), Gravity.BOTTOM);
+                    params1.bottomMargin = 0;
+                    motionLayout.setLayoutParams(params1);
+                }
+            }
+
+            @Override
+            public void onTransitionTrigger(MotionLayout motionLayout, int i, boolean b, float v) {
+                Toast.makeText(getContext(), "onTransitionTrigger", Toast.LENGTH_SHORT).show();
+               /* motionLayout.setLayoutParams(new ConstraintLayout.LayoutParams(
+                        ConstraintLayout.LayoutParams.MATCH_PARENT,
+                        ConstraintLayout.LayoutParams.MATCH_PARENT));*/
+
+            }
+        });
+        //final GestureDetector gestureDetector = new GestureDetector(getContext(), new OnSwipeGesture(this));
+
+        OnSwipeGesture.getInstance(collapseView, this);
+        //OnSwipeGesture.getInstance(motionLayout, this);
+
+       /* collapseView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View mView, MotionEvent event) {
+                if (gestureDetector.onTouchEvent(event)) {
+                    // single tap
+//                    FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(FrameLayout.
+//                            LayoutParams.MATCH_PARENT,71, Gravity.BOTTOM);
+//                    params1.bottomMargin = 71;
+//                    motionLayout.setLayoutParams(params1);
+                    return true;
+                } else {
+                    // your code for move and drag
+                    //Toast.makeText(getContext(), "onTouch recycler", Toast.LENGTH_SHORT).show();
+
+//                    motionLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.
+//                            LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, Gravity.BOTTOM));
+                }
+                return false;
+            }
+        });*/
     }
 
     @Override
+    public void onDoubleClicked() {
+        Toast.makeText(getContext(), "Double tap occurred.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClicked() {
+        Toast.makeText(getContext(), "Single tap Confirmed.", Toast.LENGTH_SHORT).show();
+        onMotionLayoutTransitionToEnd();
+    }
+    @Override
+    public void onSwipeUp() {
+        Toast.makeText(getContext(), "Swipe to up", Toast.LENGTH_SHORT).show();
+        onMotionLayoutTransitionToEnd();
+    }
+    @Override
+    public void onSwipeDown() {
+        Toast.makeText(getContext(), "Swipe to down", Toast.LENGTH_SHORT).show();
+        onMotionLayoutTransitionToStart();
+    }
+    @Override
+    public void onSwipeRight() {
+        Toast.makeText(getContext(), "Swipe to right", Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onSwipeLeft() {
+        Toast.makeText(getContext(), "Swipe to left", Toast.LENGTH_SHORT).show();
+    }
+
+    private void onMotionLayoutTransitionToEnd() {
+        motionLayout.setLayoutParams(new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                Gravity.BOTTOM));
+        motionLayout.setTransitionDuration(1000);
+        motionLayout.transitionToEnd();
+    }
+    private void onMotionLayoutTransitionToStart() {
+//                    FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(FrameLayout.
+//                            LayoutParams.MATCH_PARENT,71, Gravity.BOTTOM);
+//                    params1.bottomMargin = R.attr.actionBarSize;
+//                    motionLayout.setLayoutParams(params1);
+        motionLayout.setState(motionLayout.getStartState(),
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT);
+        //motionLayout.transitionToStart();
+    }
+
+//    private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
+//
+//        @Override
+//        public boolean onSingleTapConfirmed(MotionEvent e) {
+//            //return super.onSingleTapConfirmed(e);
+//            Toast.makeText(getContext(), "onSingleTapConfirmed", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean onSingleTapUp(MotionEvent event) {
+//            Toast.makeText(getContext(), "onSingleTapUp", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+//    }
+  /*  @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+    }*/
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+//    public interface OnFragmentInteractionListener {
+//        // TODO: Update argument type and name
+//        void onFragmentInteraction(Uri uri);
+//    }
 }

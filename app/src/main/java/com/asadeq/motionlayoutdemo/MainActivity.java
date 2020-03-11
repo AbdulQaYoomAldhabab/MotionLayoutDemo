@@ -13,16 +13,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        displayPlayerFragment(getSupportFragmentManager());
+       // displayPlayerFragment(getSupportFragmentManager());
     }
 
 
-    public void displayPlayerFragment(FragmentManager supportFragmentManager) {
-        PlayerFragment playerFragment = new PlayerFragment();
-        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentContainer, playerFragment, PlayerFragment.class.getSimpleName());
-        fragmentTransaction.commitNowAllowingStateLoss();
-        fragmentTransaction.disallowAddToBackStack();
-        fragmentTransaction.show(playerFragment);
-    }
+//    public void displayPlayerFragment(FragmentManager supportFragmentManager) {
+//        PlayerFragment playerFragment = new PlayerFragment();
+//        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+//        fragmentTransaction.add(R.id.fragmentContainer, playerFragment, PlayerFragment.class.getSimpleName());
+//        fragmentTransaction.commitNowAllowingStateLoss();
+//        fragmentTransaction.disallowAddToBackStack();
+//        fragmentTransaction.show(playerFragment);
+//    }
 }

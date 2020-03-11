@@ -2,17 +2,27 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <!-- A transition describes an animation via start and end state -->
     <Transition
         app:constraintSetStart="@+id/start"
-        app:constraintSetEnd="@+id/end">
+        app:constraintSetEnd="@+id/end"
+        >
         <!-- MotionLayout will track swipes relative to this view -->
         <OnSwipe app:touchAnchorId="@id/collapseView" />
+<!--        <OnClick app:targetId="@id/collapseView" app:clickAction="transitionToEnd"/>-->
+
     </Transition>
 
     <!-- Constraints to apply at the start of the animation -->
     <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
         <Constraint
             android:id="@+id/collapseView"
             android:layout_width="match_parent"
@@ -26,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0.0"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -36,8 +47,17 @@
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
+            android:id="@+id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <Constraint
             android:id="@+id/expandedView"
             android:alpha="1.0"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,6 +76,6 @@
             app:layout_constraintStart_toStartOf="parent"
             />
 
-            />
+
     </ConstraintSet>
 </MotionScene>
