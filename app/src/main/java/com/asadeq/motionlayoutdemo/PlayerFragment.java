@@ -170,7 +170,7 @@ public class PlayerFragment extends DialogFragment implements OnSwipeGesture.OnS
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 Gravity.BOTTOM));
-        motionLayout.setTransitionDuration(1000);
+        motionLayout.setTransitionDuration(900);
         motionLayout.transitionToEnd();
     }
     private void onMotionLayoutTransitionToStart() {
