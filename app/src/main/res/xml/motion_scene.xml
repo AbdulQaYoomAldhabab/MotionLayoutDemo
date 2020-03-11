@@ -15,13 +15,6 @@
 
     <!-- Constraints to apply at the start of the animation -->
     <ConstraintSet android:id="@+id/start">
-        <Constraint
-            android:id="@+id/motionLayout"
-            android:layout_width="match_parent"
-            android:layout_height="71dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
         <Constraint
             android:id="@+id/collapseView"
@@ -39,20 +32,13 @@
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/collapseView" />
 
 
     </ConstraintSet>
     <!-- Constraints to apply at the end of the animation -->
     <ConstraintSet android:id="@+id/end">
-
-        <Constraint
-            android:id="@+id/motionLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
         <Constraint
             android:id="@+id/expandedView"

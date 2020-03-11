@@ -27,7 +27,6 @@ public class Main2Activity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private  NavController navController = null;
 
-    private  PlayerFragment playerFragment = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,31 +45,23 @@ public class Main2Activity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-
-            playerFragment = new PlayerFragment();
-//            playerFragment.setCancelable(false);
-//            playerFragment.show(getSupportFragmentManager(), PlayerFragment.class.getSimpleName());
-    //        navController.navigate(R.id.nav_player);
-
-                displayPlayerFragment(playerFragment, getSupportFragmentManager());
-
+                addFragment(new PlayerFragment(), getSupportFragmentManager());
             }
         });
     }
 
-    public void displayPlayerFragment(Fragment mFragment, FragmentManager supportFragmentManager) {
+    public void addFragment(Fragment mFragment, FragmentManager supportFragmentManager) {
         //PlayerFragment playerFragment = new PlayerFragment();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragmentContainer, mFragment, mFragment.getClass().getSimpleName());
         fragmentTransaction.commitNowAllowingStateLoss();
         fragmentTransaction.disallowAddToBackStack();
-        fragmentTransaction.show(playerFragment);
+        fragmentTransaction.show(mFragment);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
