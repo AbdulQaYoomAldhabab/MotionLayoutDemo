@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#00FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00FFFFFF"
     app:layoutDescription="@xml/motion_scene"
+    app:showPaths="true"
     tools:context=".PlayerFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/expandedView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width ="match_parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
         <ImageView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width ="match_parent"
-            android:src="@drawable/ic_launcher_foreground"
             android:background="#6A1B9A"
-            />
+            android:contentDescription="Artist Photo"
+            android:src="@drawable/ic_launcher_foreground" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/collapseView"
         android:layout_width="match_parent"
         android:layout_height="71dp"
-        android:orientation="horizontal"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorAccent"
+        android:orientation="horizontal" />
     <!--<androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/collapseView"
         android:layout_height="71dp"
